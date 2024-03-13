@@ -8,10 +8,12 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# avoid repeating data
 Owner.destroy_all
 Breed.destroy_all
 Dog.destroy_all
 
+# import owners data from csv file
 require 'csv'
 
 CSV.foreach(Rails.root.join('owner.csv'), headers: true) do |row|
@@ -28,5 +30,18 @@ end
 
 puts "Imported #{Owner.count} owners"
 
+#import breeds data by using api
 Rake::Task['api:fetch_breeds_with_images'].invoke
 puts "There are #{Breed.count} breeds in the database."
+
+# use faker to generate dogs data
+200.times do
+  Dog.create!(
+    dog_name: Faker::Name.first_name,
+    dog_gender: Faker::Gender.short_binary_type,
+    dog_age: Faker::Number.between(from: 1, to: 10),
+    fav_food: Faker::Food.vegetables,
+    breed_id: Breed.pluck(:id).sample, # randomly pick a breed_id
+    owner_id: [nil, Owner.pluck(:id).sample].sample # randomly pick a owner_id or nil
+  )
+end

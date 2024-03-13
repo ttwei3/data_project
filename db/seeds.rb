@@ -8,13 +8,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-200.times do
-  Dog.create!(
-    dog_name: Faker::Name.first_name,
-    dog_gender: Faker::Gender.short_binary_type,
-    dog_age: Faker::Number.between(from: 1, to: 10),
-    fav_food: Faker::Food.vegetables,
-    breed_id: Breed.pluck(:id).sample, # randomly pick a breed_id
-    owner_id: [nil, Owner.pluck(:id).sample].sample # randomly pick a owner_id or nil
+require 'csv'
+
+CSV.foreach(Rails.root.join('owner.csv'), headers: true) do |row|
+  Owner.create!(
+    owner_name: row['owner_name'],
+    owner_address: row['owner_address'],
+    owner_city: row['owner_city'],
+    owner_province: row['owner_province'],
+    owner_postal_code: row['owner_postal_code'],
   )
+rescue ActiveRecord::RecordInvalid => e
+  puts "Record not saved: #{e.message}"
 end
+
+puts "Imported #{Owner.count} owners"

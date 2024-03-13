@@ -13,13 +13,12 @@
 require 'csv'
 
 CSV.foreach(Rails.root.join('owner.csv'), headers: true) do |row|
-  Owner.create!(
-    owner_name: row['owner_name'],
-    owner_address: row['owner_address'],
-    owner_city: row['owner_city'],
-    owner_province: row['owner_province'],
-    owner_postal_code: row['owner_postal_code'],
-  )
+  Owner.find_or_create_by(owner_name: row['owner_name']) do |owner|
+    owner.owner_address = row['owner_address']
+    owner.owner_city = row['owner_city']
+    owner.owner_province = row['owner_province']
+    owner.owner_postal_code = row['owner_postal_code']
+  end
 rescue ActiveRecord::RecordInvalid => e
   puts "Record not saved: #{e.message}"
 end

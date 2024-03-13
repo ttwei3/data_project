@@ -13,5 +13,8 @@
     dog_name: Faker::Name.first_name,
     dog_gender: Faker::Gender.short_binary_type,
     dog_age: Faker::Number.between(from: 1, to: 10),
-    fav_food: Faker::Food.vegetables)
+    fav_food: Faker::Food.vegetables,
+    breed_id: Breed.pluck(:id).sample, # randomly pick a breed_id
+    owner_id: [nil, Owner.pluck(:id).sample].sample # randomly pick a owner_id or nil
+  )
 end

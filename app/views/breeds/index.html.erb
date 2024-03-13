@@ -1,2 +1,11 @@
-<h1>Breeds#index</h1>
-<p>Find me in app/views/breeds/index.html.erb</p>
+<!-- app/views/breeds/index.html.erb -->
+<h1>Breeds</h1>
+
+<ul>
+  <% @breeds.each do |breed| %>
+    <li>
+      <%= breed.breed_name %>
+      <%= image_tag breed.image, size: '200x200' if breed.image.present? %>
+    </li>
+  <% end %>
+</ul>

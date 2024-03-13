@@ -30,7 +30,7 @@ end
 
 puts "Imported #{Owner.count} owners"
 
-#import breeds data by using api
+# import breeds data by using api
 Rake::Task['api:fetch_breeds_with_images'].invoke
 puts "There are #{Breed.count} breeds in the database."
 
@@ -45,3 +45,4 @@ puts "There are #{Breed.count} breeds in the database."
     owner_id: [nil, Owner.pluck(:id).sample].sample # randomly pick a owner_id or nil
   )
 end
+puts "Successfully"

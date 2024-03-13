@@ -8,10 +8,6 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-# avoid repeating data
-Owner.destroy_all
-Breed.destroy_all
-Dog.destroy_all
 
 # import owners data from csv file
 require 'csv'
@@ -45,4 +41,4 @@ puts "There are #{Breed.count} breeds in the database."
     owner_id: [nil, Owner.pluck(:id).sample].sample # randomly pick a owner_id or nil
   )
 end
-puts "Successfully"
+puts "Successfully generate #{Dog.count} dogs."

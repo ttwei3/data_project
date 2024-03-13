@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Owner.destroy_all
+Breed.destroy_all
+Dog.destroy_all
+
 require 'csv'
 
 CSV.foreach(Rails.root.join('owner.csv'), headers: true) do |row|
@@ -24,3 +28,5 @@ end
 
 puts "Imported #{Owner.count} owners"
 
+Rake::Task['api:fetch_breeds_with_images'].invoke
+puts "There are #{Breed.count} breeds in the database."

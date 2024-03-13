@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner_name: MyString
+  owner_address: MyString
+  owner_city: MyString
+  owner_province: MyString
+  owner_postal_code: MyString
+
+two:
+  owner_name: MyString
+  owner_address: MyString
+  owner_city: MyString
+  owner_province: MyString
+  owner_postal_code: MyString

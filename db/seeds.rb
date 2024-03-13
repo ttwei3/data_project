@@ -23,3 +23,4 @@ rescue ActiveRecord::RecordInvalid => e
 end
 
 puts "Imported #{Owner.count} owners"
+

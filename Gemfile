@@ -69,3 +69,4 @@ end
 gem "faker"
 gem 'net-http'
 gem 'json'
+gem 'geocoder'

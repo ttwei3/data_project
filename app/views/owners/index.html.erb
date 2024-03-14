@@ -4,7 +4,7 @@
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
-      center: {lat: 49.8951, lng: -97.1384} // 以 Winnipeg 为地图中心
+      center: {lat: 49.8951, lng: -97.1384}
     });
 
     var addresses = <%= @owners.map { |o| {name: o.owner_name, lat: o.latitude, lng: o.longitude} }.to_json.html_safe %>;

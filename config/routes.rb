@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   root "dogs#index"
 
-  get 'breeds', to: 'breeds#index'
-
   get 'about', to: 'pages#index'
 
-  resources :dogs, only: [:index]
+  resources :dogs
 
-  resources :owners, only: [:index]
+  resources :breeds
+
+  resources :owners
 end

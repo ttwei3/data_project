@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   get 'breeds', to: 'breeds#index'
 
   resources :dogs, only: [:index]
+
+  resources :owners, only: [:index]
 end

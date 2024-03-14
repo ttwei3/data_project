@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_13_230932) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_14_012935) do
   create_table "breeds", force: :cascade do |t|
     t.string "breed_name"
     t.string "image"
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_13_230932) do
     t.string "owner_postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   add_foreign_key "dogs", "breeds"

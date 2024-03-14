@@ -1,5 +1,13 @@
 <!-- app/views/breeds/index.html.erb -->
-<h1>Breeds</h1>
+<h1>Breeds Info</h1>
+
+<nav>
+    <ul>
+    <li><%= link_to "Home", root_path %></a></li>
+    <li><%= link_to "Check Breeds", breeds_path %></a></li>
+    <li><%= link_to "Check Owners", owners_path %></a></li>
+  </ul>
+</nav>
 
 <ul>
   <% @breeds.each do |breed| %>

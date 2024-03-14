@@ -1,0 +1,27 @@
+<!-- app/views/breeds/show.html.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @breed.breed_name %></title>
+</head>
+<body>
+  <%= link_to 'Back to Dogs List', dogs_path %>
+
+  <h1><%= @breed.breed_name %></h1>
+
+  <% if @breed.image.present? %>
+    <%= image_tag @breed.image, alt: @breed.breed_name, width: "400" %>
+  <% else %>
+    <p>No image available</p>
+  <% end %>
+  <h2>Dogs of this Breed:</h2>
+  <ul>
+    <% @breed.dogs.each do |dog| %>
+      <li><%= link_to dog.dog_name, dog_path(dog) %></li>
+    <% end %>
+  </ul>
+
+</body>
+</html>

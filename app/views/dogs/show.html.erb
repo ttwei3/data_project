@@ -1,0 +1,28 @@
+<!-- app/views/dogs/show.html.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Information</title>
+</head>
+<body>
+  <%= link_to 'Back to Dogs List', dogs_path %>
+  <h1><%= @dog.dog_name %>'s Details</h1>
+  <p>Gender: <%= @dog.dog_gender %></p>
+  <p>Age: <%= @dog.dog_age %></p>
+  <p>Favorite Food: <%= @dog.fav_food %></p>
+  <p>Breed: <%= link_to @dog.breed.breed_name, breed_path(@dog.breed) %></p>
+  <% if @dog.breed.image.present? %>
+    <%= image_tag @dog.breed.image, alt: @dog.breed.breed_name, size: "100x100" %>
+  <% else %>
+    <p>No Image</p>
+  <% end %>
+
+  <% if @dog.owner.present? %>
+    <p>Owner: <%= link_to @dog.owner.owner_name, owner_path(@dog.owner) %></p>
+  <% else %>
+    <p>No Owner</p>
+  <% end %>
+</body>
+</html>

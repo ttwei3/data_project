@@ -1,14 +1,24 @@
 <!-- app/views/breeds/index.html.erb -->
-<h1>Breeds Info</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Breeds Info</h1>
 
-<%= render partial: 'layouts/navigation' %>
-<%= yield %>
+  <%= render partial: 'layouts/navigation' %>
+  <%= yield %>
 
-<ul>
-  <% @breeds.each do |breed| %>
-    <li>
-      <%= breed.breed_name %>
-      <%= image_tag breed.image, size: '200x200' if breed.image.present? %>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @breeds.each do |breed| %>
+      <li>
+        <%= breed.breed_name %>
+        <%= image_tag breed.image, size: '200x200' if breed.image.present? %>
+      </li>
+    <% end %>
+  </ul>
+</body>
+</html>

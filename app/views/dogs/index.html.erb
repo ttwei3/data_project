@@ -1,0 +1,35 @@
+<!-- app/views/dogs/index.html.erb -->
+<h1>Dogs List</h1>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Favorite Food</th>
+      <th>Breed</th>
+      <th>Image</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dogs.each do |dog| %>
+      <tr>
+        <td><%= dog.dog_name %></td>
+        <td><%= dog.dog_gender %></td>
+        <td><%= dog.dog_age %></td>
+        <td><%= dog.fav_food %></td>
+        <td><%= dog.breed.breed_name %></td>
+        <td>
+          <% if dog.breed.image.present? %>
+            <%= image_tag dog.breed.image, alt: "#{dog.breed.breed_name} image", size: "100x100" %>
+          <% else %>
+            No Image
+          <% end %>
+        </td>
+        <td><%= dog.owner&.owner_name || "No Owner" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

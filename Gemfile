@@ -70,3 +70,4 @@ gem "faker"
 gem 'net-http'
 gem 'json'
 gem 'geocoder'
+gem 'kaminari'

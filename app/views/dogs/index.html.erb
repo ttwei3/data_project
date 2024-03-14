@@ -1,13 +1,9 @@
 <!-- app/views/dogs/index.html.erb -->
 <h1>Dogs List</h1>
 
-<nav>
-    <ul>
-    <li><%= link_to "Home", root_path %></a></li>
-    <li><%= link_to "Check Breeds", breeds_path %></a></li>
-    <li><%= link_to "Check Owners", owners_path %></a></li>
-  </ul>
-</nav>
+<%= render partial: 'layouts/navigation' %>
+<%= yield %>
+
 <table border="1">
   <thead>
     <tr>

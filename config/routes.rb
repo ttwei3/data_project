@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'breeds', to: 'breeds#index'
 
+  get 'about', to: 'pages#index'
+
   resources :dogs, only: [:index]
 
   resources :owners, only: [:index]

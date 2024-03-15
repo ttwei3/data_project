@@ -8,6 +8,13 @@
 </head>
 <body>
   <h1>Dogs List</h1>
+  <%= form_with(url: dogs_path, method: :get, local: true) do |form| %>
+    <%= form.text_field :breed_name, placeholder: "Search for breed name" %>
+    <%= form.submit "Search" %>
+  <% end %>
+  <% if @dogs.empty? %>
+    <p>No dogs found matching your search criteria. Try using a more specific search term.</p>
+  <% end %>
 
   <%= render partial: 'layouts/navigation' %>
   <%= yield %>

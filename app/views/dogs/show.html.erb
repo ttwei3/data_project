@@ -1,4 +1,3 @@
-<!-- app/views/dogs/show.html.erb -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,23 +8,50 @@
 <body>
   <div class="container mt-5">
     <%= render partial: 'layouts/navigation' %>
-    <%= link_to 'Back to Dogs List', dogs_path %>
-    <h1><%= @dog.dog_name %>'s Details</h1>
-    <p class="mb-3">Gender: <%= @dog.dog_gender %></p>
-    <p class="mb-3">Age: <%= @dog.dog_age %></p>
-    <p class="mb-3">Favorite Food: <%= @dog.fav_food %></p>
-    <p class="mb-3">Breed: <%= link_to @dog.breed.breed_name, breed_path(@dog.breed) %></p>
-    <% if @dog.breed.image.present? %>
-      <%= image_tag @dog.breed.image, alt: @dog.breed.breed_name, size: "100x100" %>
-    <% else %>
-      <p>No Image</p>
-    <% end %>
+    <%= link_to 'Back to Dogs List', dogs_path%>
 
-    <% if @dog.owner.present? %>
-      <div class="mb-3">Owner: <%= link_to @dog.owner.owner_name, owner_path(@dog.owner) %></div>
-    <% else %>
-      <div class="mb-3">No Owner</div>
-    <% end %>
+    <h1><%= @dog.dog_name %>'s Details</h1>
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">Gender</th>
+          <td><%= @dog.dog_gender %></td>
+        </tr>
+        <tr>
+          <th scope="row">Age</th>
+          <td><%= @dog.dog_age %></td>
+        </tr>
+        <tr>
+          <th scope="row">Favorite Food</th>
+          <td><%= @dog.fav_food %></td>
+        </tr>
+        <tr>
+          <th scope="row">Breed</th>
+          <td><%= link_to @dog.breed.breed_name, breed_path(@dog.breed) %></td>
+        </tr>
+        <tr>
+          <th scope="row">Image</th>
+          <td>
+            <% if @dog.breed.image.present? %>
+              <%= image_tag @dog.breed.image, alt: @dog.breed.breed_name, size: "100x100" %>
+            <% else %>
+              No Image
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Owner</th>
+          <td>
+            <% if @dog.owner.present? %>
+              <%= link_to @dog.owner.owner_name, owner_path(@dog.owner) %>
+            <% else %>
+              No Owner
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </body>
 </html>

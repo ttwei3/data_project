@@ -39,7 +39,7 @@
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap">
     </script>
-    <h2>Dogs of this Owner:</h2>
+    <h3>Dogs of this Owner:</h3>
     <ul>
       <% @owner.dogs.each do |dog| %>
         <li><%= link_to dog.dog_name, dog_path(dog) %></li>

@@ -17,7 +17,7 @@
     <% else %>
       <p>No image available</p>
     <% end %>
-    <h2>Dogs of this Breed:</h2>
+    <h3>Dogs of this Breed:</h3>
     <div class="list-group">
       <% @breed.dogs.each do |dog| %>
         <%= link_to dog.dog_name, dog_path(dog), class: "list-group-item list-group-item-action" %>

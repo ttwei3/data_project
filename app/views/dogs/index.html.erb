@@ -11,12 +11,15 @@
     <%= render partial: 'layouts/navigation' %>
     <h1>Dogs List</h1>
     <div class="col-auto">
-      <%= form_with(url: dogs_path, method: :get, local: true) do |form| %>
-        <%= form.text_field :breed_name, placeholder: "Search for breed name" %>
-        <%= form.select :has_owner, [['Yes', true], ['No', false]], include_blank: true %>
-        <%= form.label :has_owner, 'Owner' %>
-        <%= form.submit "Search" %>
-      <% end %>
+      <div class="d-flex justify-content-between" style="gap: 1rem;">
+        <%= form_with(url: dogs_path, method: :get, local: true, class: "w-100") do |form| %>
+          <div class="d-flex justify-content-between" style="gap: 1rem;">
+            <%= form.text_field :breed_name, placeholder: "Search for breed name", class: "form-control me-3", style: "flex-grow: 1;" %>
+            <%= form.select :has_owner, [['Owner', ''], ['Yes', true], ['No', false]], {}, {class: "form-select me-3", style: "width: auto;"} %>
+            <%= form.submit "Search", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
     <% if @dogs.empty? %>
       <p>No dogs found matching your search criteria. Try using a more specific search term.</p>

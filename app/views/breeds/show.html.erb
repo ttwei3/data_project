@@ -1,29 +1,18 @@
 <!-- app/views/breeds/show.html.erb -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= @breed.breed_name %></title>
-</head>
-<body>
-  <div class="container mt-5">
-    <%= render partial: 'layouts/navigation' %>
-    <%= link_to 'Back to Dogs List', dogs_path %>
+<div class="container mt-5">
+  <%= render partial: 'layouts/navigation' %>
+  <%= link_to 'Back to Dogs List', dogs_path %>
 
-    <h1><%= @breed.breed_name %></h1>
-    <% if @breed.image.present? %>
-      <%= image_tag @breed.image, alt: @breed.breed_name, class: "img-fluid mb-3", style: "max-width: 100%; height: auto;" %>
-    <% else %>
-      <p>No image available</p>
+  <h1><%= @breed.breed_name %></h1>
+  <% if @breed.image.present? %>
+    <%= image_tag @breed.image, alt: @breed.breed_name, class: "img-fluid mb-3", style: "max-width: 100%; height: auto;" %>
+  <% else %>
+    <p>No image available</p>
+  <% end %>
+  <h3>Dogs of this Breed:</h3>
+  <div class="list-group">
+    <% @breed.dogs.each do |dog| %>
+      <%= link_to dog.dog_name, dog_path(dog), class: "list-group-item list-group-item-action" %>
     <% end %>
-    <h3>Dogs of this Breed:</h3>
-    <div class="list-group">
-      <% @breed.dogs.each do |dog| %>
-        <%= link_to dog.dog_name, dog_path(dog), class: "list-group-item list-group-item-action" %>
-      <% end %>
-    </div>
-
   </div>
-</body>
-</html>
+</div>

@@ -1,65 +1,55 @@
 <!-- app/views/owners/index.html.erb -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Owners Address</title>
-</head>
-<body>
-  <div class="container mt-5">
-    <%= render partial: 'layouts/navigation' %>
-    <h1>Owners List</h1>
-    <div id="map" style="width: 100%; height: 400px;"></div>
-    <table class="table">
-      <thead>
+<div class="container mt-5">
+  <%= render partial: 'layouts/navigation' %>
+  <h1>Owners List</h1>
+  <div id="map" style="width: 100%; height: 400px;"></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Province</th>
+        <th>Postal Code</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @owners.each do |owner| %>
         <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>City</th>
-          <th>Province</th>
-          <th>Postal Code</th>
-          <th>Longitude</th>
-          <th>Latitude</th>
+          <td><%= owner.owner_name %></td>
+          <td><%= owner.owner_address %></td>
+          <td><%= owner.owner_city %></td>
+          <td><%= owner.owner_province %></td>
+          <td><%= owner.owner_postal_code %></td>
+          <td><%= owner.longitude %></td>
+          <td><%= owner.latitude %></td>
         </tr>
-      </thead>
-      <tbody>
-        <% @owners.each do |owner| %>
-          <tr>
-            <td><%= owner.owner_name %></td>
-            <td><%= owner.owner_address %></td>
-            <td><%= owner.owner_city %></td>
-            <td><%= owner.owner_province %></td>
-            <td><%= owner.owner_postal_code %></td>
-            <td><%= owner.longitude %></td>
-            <td><%= owner.latitude %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <script>
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: {lat: 49.8951, lng: -97.1384}
-        });
+      <% end %>
+    </tbody>
+  </table>
+  <script>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: {lat: 49.8951, lng: -97.1384}
+      });
 
-        var addresses = <%= @owners.map { |o| {name: o.owner_name, lat: o.latitude, lng: o.longitude} }.to_json.html_safe %>;
+      var addresses = <%= @owners.map { |o| {name: o.owner_name, lat: o.latitude, lng: o.longitude} }.to_json.html_safe %>;
 
-        addresses.forEach(function(address) {
-          if(typeof address.lat === 'number' && typeof address.lng === 'number') {
-            var marker = new google.maps.Marker({
-              position: {lat: address.lat, lng: address.lng},
-              map: map,
-              title: address.name
-            });
-          }
-        });
-      }
-    </script>
+      addresses.forEach(function(address) {
+        if(typeof address.lat === 'number' && typeof address.lng === 'number') {
+          var marker = new google.maps.Marker({
+            position: {lat: address.lat, lng: address.lng},
+            map: map,
+            title: address.name
+          });
+        }
+      });
+    }
+  </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap"></script>
-    <%= paginate @owners %>
-  </div>
-</body>
-</html>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap"></script>
+  <%= paginate @owners %>
+</div>

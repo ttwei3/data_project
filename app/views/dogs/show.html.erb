@@ -8,8 +8,9 @@
 </head>
 <body>
   <div class="container mt-5">
-    <h1><%= @dog.dog_name %>'s Details</h1>
+    <%= render partial: 'layouts/navigation' %>
     <%= link_to 'Back to Dogs List', dogs_path %>
+    <h1><%= @dog.dog_name %>'s Details</h1>
     <p class="mb-3">Gender: <%= @dog.dog_gender %></p>
     <p class="mb-3">Age: <%= @dog.dog_age %></p>
     <p class="mb-3">Favorite Food: <%= @dog.fav_food %></p>

@@ -1,15 +1,25 @@
 <!-- app/views/pages/index.html.erb -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <%= render partial: 'layouts/navigation' %>
 
-<h1>About</h1>
+    <h1>About</h1>
 
-<%= render partial: 'layouts/navigation' %>
-<%= yield %>
+    <p class="mb-3"><strong>API for Dog Breeds: </strong>This will provide data on various dog breeds, including breed names and associated images. The relevant database table is Breeds, with columns for the breed's unique identifier (breed_id), the breed name (breed_name), and an image (image).</p>
 
-<p><strong>API for Dog Breeds: </strong>This will provide data on various dog breeds, including breed names and associated images. The relevant database table is Breeds, with columns for the breed's unique identifier (breed_id), the breed name (breed_name), and an image (image).</p>
+    <p class="mb-3"><strong>CSV File for Owners: </strong>The CSV file contains information on dog owners, such as their names(owner_name), addresses(owner_address), cities(owner_city), provinces(owner_province), postal codes(owner_postal_code), and geographical coordinates (latitude and longitude). This data will populate the Owners table, which includes columns for each of these attributes, with owner_id serving as the primary key.</p>
 
-<p><strong>CSV File for Owners: </strong>The CSV file contains information on dog owners, such as their names(owner_name), addresses(owner_address), cities(owner_city), provinces(owner_province), postal codes(owner_postal_code), and geographical coordinates (latitude and longitude). This data will populate the Owners table, which includes columns for each of these attributes, with owner_id serving as the primary key.</p>
+    <p class="mb-3"><strong>Faker Gem for Dogs: </strong>This tool will be used to create mock data for individual dogs, such as names, ages, genders, and favorite foods. The resulting data fills the Dogs table, which includes columns for a unique dog identifier (dog_id), the dog's name (dog_name), age (dog_age), gender (dog_gender), and favorite food (fav_food). Additionally, this table has foreign keys for the breed (breed_id) and the owner (owner_id), which can be null, indicating some dogs may not have a owner.</p>
 
-<p><strong>Faker Gem for Dogs: </strong>This tool will be used to create mock data for individual dogs, such as names, ages, genders, and favorite foods. The resulting data fills the Dogs table, which includes columns for a unique dog identifier (dog_id), the dog's name (dog_name), age (dog_age), gender (dog_gender), and favorite food (fav_food). Additionally, this table has foreign keys for the breed (breed_id) and the owner (owner_id), which can be null, indicating some dogs may not have a owner.</p>
+    <p class="mb-3">Integration of these datasets will be done through the relational database structure, with the Dogs table linking to both the Breeds and Owners tables via foreign keys. This ensures that each dog's breed and owner information can be queried together. The integrity of the data across these tables will be maintained by consistent use of unique identifiers and foreign key constraints, allowing for accurate relationships between the data points.</p>
 
-<p>Integration of these datasets will be done through the relational database structure, with the Dogs table linking to both the Breeds and Owners tables via foreign keys. This ensures that each dog's breed and owner information can be queried together. The integrity of the data across these tables will be maintained by consistent use of unique identifiers and foreign key constraints, allowing for accurate relationships between the data points.</p>
-
+  </div>
+</body>
+</html>

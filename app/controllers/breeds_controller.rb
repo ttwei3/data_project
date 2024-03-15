@@ -1,6 +1,6 @@
 class BreedsController < ApplicationController
   def index
-    @breeds = Breed.page(params[:page]).per(10)
+    @breeds = Breed.page(params[:page]).per(12)
   end
 
   def show

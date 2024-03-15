@@ -8,43 +8,43 @@
   <title>Owner Infomation</title>
 </head>
 <body>
-  <%= link_to 'Back to Dogs List', dogs_path %>
-  <h1><%= @owner.owner_name %>'s Address</h1>
+  <div class="container mt-5">
+    <%= render partial: 'layouts/navigation' %>
+    <%= link_to 'Back to Dogs List', dogs_path %>
+    <h1><%= @owner.owner_name %>'s Address</h1>
+    <div id="map" style="width: 100%; height: 400px;"></div>
+    <p>Name: <%= @owner.owner_name %></p>
+    <p>Address: <%= @owner.owner_address %></p>
+    <p>City: <%= @owner.owner_city %></p>
+    <p>Province: <%= @owner.owner_province %></p>
+    <p>Postal Code: <%= @owner.owner_postal_code %></p>
+    <p>Longitude: <%= @owner.longitude %></p>
+    <p>Latitude: <%= @owner.latitude %></p>
+    <script>
+      function initMap() {
+        var ownerLocation = {lat: <%= @owner.latitude %>, lng: <%= @owner.longitude %>};
 
-  <%= render partial: 'layouts/navigation' %>
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: ownerLocation
+        });
 
-  <div id="map" style="width: 100%; height: 400px;"></div>
-  <p>Name: <%= @owner.owner_name %></p>
-  <p>Address: <%= @owner.owner_address %></p>
-  <p>City: <%= @owner.owner_city %></p>
-  <p>Province: <%= @owner.owner_province %></p>
-  <p>Postal Code: <%= @owner.owner_postal_code %></p>
-  <p>Longitude: <%= @owner.longitude %></p>
-  <p>Latitude: <%= @owner.latitude %></p>
-  <script>
-    function initMap() {
-      var ownerLocation = {lat: <%= @owner.latitude %>, lng: <%= @owner.longitude %>};
-
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: ownerLocation
-      });
-
-      var marker = new google.maps.Marker({
-        position: ownerLocation,
-        map: map,
-        title: '<%= @owner.owner_name %>'
-      });
-    }
-  </script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap">
-  </script>
-  <h2>Dogs of this Owner:</h2>
-  <ul>
-    <% @owner.dogs.each do |dog| %>
-      <li><%= link_to dog.dog_name, dog_path(dog) %></li>
-    <% end %>
-  </ul>
+        var marker = new google.maps.Marker({
+          position: ownerLocation,
+          map: map,
+          title: '<%= @owner.owner_name %>'
+        });
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap">
+    </script>
+    <h2>Dogs of this Owner:</h2>
+    <ul>
+      <% @owner.dogs.each do |dog| %>
+        <li><%= link_to dog.dog_name, dog_path(dog) %></li>
+      <% end %>
+    </ul>
+  </div>
 </body>
 </html>

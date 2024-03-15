@@ -8,9 +8,8 @@
 </head>
 <body>
   <div class="container mt-5">
-    <h1>Dogs List</h1>
     <%= render partial: 'layouts/navigation' %>
-    <%= yield %>
+    <h1>Dogs List</h1>
     <div class="col-auto">
       <%= form_with(url: dogs_path, method: :get, local: true) do |form| %>
         <%= form.text_field :breed_name, placeholder: "Search for breed name" %>
@@ -63,7 +62,7 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @dogs %>
+    <%= paginate @dogs, bootstrap: 4 %>
   </div>
 </body>
 </html>

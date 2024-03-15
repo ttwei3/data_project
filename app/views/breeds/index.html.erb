@@ -4,22 +4,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Breeds Info</title>
 </head>
 <body>
-  <h1>Breeds Info</h1>
+  <div class="container mt-5">
+    <%= render partial: 'layouts/navigation' %>
+    <h1>Breeds List</h1>
+    <div class="row">
+      <% @breeds.each do |breed| %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <% if breed.image.present? %>
+              <%= image_tag breed.image, alt: breed.breed_name, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= breed.breed_name %></h5>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
 
-  <%= render partial: 'layouts/navigation' %>
-  <%= yield %>
-
-  <ul>
-    <% @breeds.each do |breed| %>
-      <li>
-        <%= breed.breed_name %>
-        <%= image_tag breed.image, size: '200x200' if breed.image.present? %>
-      </li>
-    <% end %>
-  </ul>
-  <%= paginate @breeds %>
+    <%= paginate @breeds, bootstrap: 4 %>
+  </div>
 </body>
 </html>

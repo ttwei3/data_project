@@ -2,62 +2,77 @@
 <div class="container mt-5">
   <%= render partial: 'layouts/navigation' %>
   <h1>Dogs List</h1>
-  <div class="col-auto">
-    <div class="d-flex justify-content-between" style="gap: 1rem;">
-      <%= form_with(url: dogs_path, method: :get, local: true, class: "w-100") do |form| %>
-        <div class="d-flex justify-content-between" style="gap: 1rem;">
-          <%= form.text_field :breed_name, placeholder: "Search for breed name", class: "form-control me-3", style: "flex-grow: 1;" %>
-          <%= form.select :has_owner, [['Owner', ''], ['Yes', true], ['No', false]], {}, {class: "form-select me-3", style: "width: auto;"} %>
-          <%= form.submit "Search", class: "btn btn-primary" %>
+  <div class="row mb-4">
+    <div class="col-12">
+      <%= form_with(url: dogs_path, method: :get, local: true, class: "needs-validation", novalidate: true) do |form| %>
+        <div class="row g-3 align-items-end justify-content-between">
+          <div class="col-12 col-md-8">
+            <%= form.text_field :search, placeholder: "Search by dog name, breed name, or owner name", class: "form-control form-control-lg", aria: {label: "Search"} %>
+          </div>
+          <div class="col-12 col-md-2">
+            <%= form.select :has_owner, [['Owner', ''], ['Yes', true], ['No', false]], {}, {class: "form-select form-select-lg", aria: {label: "Owner status"}} %>
+          </div>
+          <div class="col-12 col-md-2 d-grid">
+            <%= form.submit "Search", class: "btn btn-md btn-primary" %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
-  <% if @dogs.empty? %>
-    <p>No dogs found matching your search criteria. Try using a more specific search term.</p>
-  <% end %>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Age</th>
-        <th>Favorite Food</th>
-        <th>Breed</th>
-        <th>Image</th>
-        <th>Owner</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @dogs.each do |dog| %>
-        <tr>
-          <td><%= dog.dog_name %></td>
-          <td><%= dog.dog_gender %></td>
-          <td><%= dog.dog_age %></td>
-          <td><%= dog.fav_food %></td>
-          <td>
-            <%= link_to dog.breed.breed_name, breed_path(dog.breed) %>
-          </td>
-          <td>
-            <% if dog.breed.image.present? %>
-              <%= image_tag dog.breed.image, alt: "#{dog.breed.breed_name} image", size: "100x100" %>
-            <% else %>
-              No Image
+  <% if @dogs.empty? %>
+    <div class="row">
+      <div class="col-12">
+        <p>No dogs found matching your search criteria. Try using a more specific search term.</p>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Favorite Food</th>
+              <th>Breed</th>
+              <th>Image</th>
+              <th>Owner</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @dogs.each do |dog| %>
+              <tr>
+                <td><%= dog.dog_name %></td>
+                <td><%= dog.dog_gender %></td>
+                <td><%= dog.dog_age %></td>
+                <td><%= dog.fav_food %></td>
+                <td>
+                  <%= link_to dog.breed.breed_name, breed_path(dog.breed) %>
+                </td>
+                <td>
+                  <% if dog.breed.image.present? %>
+                    <%= image_tag dog.breed.image, alt: "#{dog.breed.breed_name} image", size: "100x100" %>
+                  <% else %>
+                    No Image
+                  <% end %>
+                </td>
+                <td>
+                  <% if dog.owner.present? %>
+                    <%= link_to dog.owner.owner_name, owner_path(dog.owner) %>
+                  <% else %>
+                    No Owner
+                  <% end %>
+                </td>
+                <td><%= link_to 'View Details', dog_path(dog), class: "btn btn-info" %></td>
+              </tr>
             <% end %>
-          </td>
-          <td>
-            <% if dog.owner.present? %>
-              <%= link_to dog.owner.owner_name, owner_path(dog.owner) %>
-            <% else %>
-              No Owner
-            <% end %>
-          </td>
-          <td><%= link_to 'View Details', dog_path(dog) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @dogs%>
+          </tbody>
+        </table>
+        <%= paginate @dogs %>
+      </div>
+    </div>
+  <% end %>
 </div>

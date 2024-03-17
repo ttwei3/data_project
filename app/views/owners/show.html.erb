@@ -1,16 +1,36 @@
 <!-- app/views/owners/show.html.erb -->
 <div class="container mt-5">
   <%= render partial: 'layouts/navigation' %>
-  <%= link_to 'Back to Dogs List', dogs_path %>
-  <h1><%= @owner.owner_name %>'s Address</h1>
-  <div id="map" style="width: 100%; height: 400px;"></div>
-  <p>Name: <%= @owner.owner_name %></p>
-  <p>Address: <%= @owner.owner_address %></p>
-  <p>City: <%= @owner.owner_city %></p>
-  <p>Province: <%= @owner.owner_province %></p>
-  <p>Postal Code: <%= @owner.owner_postal_code %></p>
-  <p>Longitude: <%= @owner.longitude %></p>
-  <p>Latitude: <%= @owner.latitude %></p>
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Back to Dogs List', dogs_path, class: "btn btn-secondary mb-3" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h1><%= @owner.owner_name %>'s Address</h1>
+      <div id="map" style="width: 100%; height: 400px;"></div>
+      <p>Name: <%= @owner.owner_name %></p>
+      <p>Address: <%= @owner.owner_address %></p>
+      <p>City: <%= @owner.owner_city %></p>
+      <p>Province: <%= @owner.owner_province %></p>
+      <p>Postal Code: <%= @owner.owner_postal_code %></p>
+      <p>Longitude: <%= @owner.longitude %></p>
+      <p>Latitude: <%= @owner.latitude %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h3>Dogs of this Owner:</h3>
+      <ul>
+        <% @owner.dogs.each do |dog| %>
+          <li><%= link_to dog.dog_name, dog_path(dog) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
   <script>
     function initMap() {
       var ownerLocation = {lat: <%= @owner.latitude %>, lng: <%= @owner.longitude %>};
@@ -30,10 +50,4 @@
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4SsS7L7lBrQtih7D2fXkuisfG-d37HlU&callback=initMap">
   </script>
-  <h3>Dogs of this Owner:</h3>
-  <ul>
-    <% @owner.dogs.each do |dog| %>
-      <li><%= link_to dog.dog_name, dog_path(dog) %></li>
-    <% end %>
-  </ul>
 </div>

@@ -1,16 +1,20 @@
 class DogsController < ApplicationController
   def index
-    @dogs = Dog.all
+    @dogs = Dog.includes(:breed, :owner)
 
-    if params[:breed_name].present?
-      @dogs = @dogs.joins(:breed).where('breeds.breed_name LIKE ?', "%#{params[:breed_name]}%")
+    if params[:search].present?
+      search_term = "%#{params[:search]}%"
+      @dogs = @dogs.left_outer_joins(:breed, :owner).where(
+        'dogs.dog_name LIKE :search OR breeds.breed_name LIKE :search OR owners.owner_name LIKE :search',
+        search: search_term
+      )
     end
 
     if params[:has_owner].present?
       if params[:has_owner] == 'true'
-        @dogs = @dogs.joins(:owner)
+        @dogs = @dogs.where.not(owner_id: nil)
       elsif params[:has_owner] == 'false'
-        @dogs = @dogs.where(owner: nil)
+        @dogs = @dogs.where(owner_id: nil)
       end
     end
 

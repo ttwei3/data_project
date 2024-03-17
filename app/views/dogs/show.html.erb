@@ -1,48 +1,60 @@
 <!-- app/views/dogs/show.html.erb -->
 <div class="container mt-5">
   <%= render partial: 'layouts/navigation' %>
-  <%= link_to 'Back to Dogs List', dogs_path%>
+  <div class="row">
+    <div class="col-12">
+      <%= link_to 'Back to Dogs List', dogs_path, class: "btn btn-secondary mb-3" %>
+    </div>
+  </div>
 
-  <h1><%= @dog.dog_name %>'s Details</h1>
+  <div class="row">
+    <div class="col-12">
+      <h1><%= @dog.dog_name %>'s Details</h1>
+    </div>
+  </div>
 
-  <table class="table">
-    <tbody>
-      <tr>
-        <th scope="row">Gender</th>
-        <td><%= @dog.dog_gender %></td>
-      </tr>
-      <tr>
-        <th scope="row">Age</th>
-        <td><%= @dog.dog_age %></td>
-      </tr>
-      <tr>
-        <th scope="row">Favorite Food</th>
-        <td><%= @dog.fav_food %></td>
-      </tr>
-      <tr>
-        <th scope="row">Breed</th>
-        <td><%= link_to @dog.breed.breed_name, breed_path(@dog.breed) %></td>
-      </tr>
-      <tr>
-        <th scope="row">Image</th>
-        <td>
-          <% if @dog.breed.image.present? %>
-            <%= image_tag @dog.breed.image, alt: @dog.breed.breed_name, size: "100x100" %>
-          <% else %>
-            No Image
-          <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th scope="row">Owner</th>
-        <td>
-          <% if @dog.owner.present? %>
-            <%= link_to @dog.owner.owner_name, owner_path(@dog.owner) %>
-          <% else %>
-            No Owner
-          <% end %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Gender</th>
+            <td><%= @dog.dog_gender %></td>
+          </tr>
+          <tr>
+            <th scope="row">Age</th>
+            <td><%= @dog.dog_age %></td>
+          </tr>
+          <tr>
+            <th scope="row">Favorite Food</th>
+            <td><%= @dog.fav_food %></td>
+          </tr>
+          <tr>
+            <th scope="row">Breed</th>
+            <td><%= link_to @dog.breed.breed_name, breed_path(@dog.breed) %></td>
+          </tr>
+          <tr>
+            <th scope="row">Image</th>
+            <td>
+              <% if @dog.breed.image.present? %>
+                <%= image_tag @dog.breed.image, alt: @dog.breed.breed_name, size: "100x100" %>
+              <% else %>
+                No Image
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Owner</th>
+            <td>
+              <% if @dog.owner.present? %>
+                <%= link_to @dog.owner.owner_name, owner_path(@dog.owner) %>
+              <% else %>
+                No Owner
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

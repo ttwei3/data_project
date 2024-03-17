@@ -10,7 +10,7 @@
             <%= image_tag breed.image, alt: breed.breed_name, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
           <% end %>
           <div class="card-body">
-            <h5 class="card-title"><%= breed.breed_name %></h5>
+            <h5 class="card-title"><%= link_to breed.breed_name, breed_path(breed) %></h5>
           </div>
         </div>
       </div>

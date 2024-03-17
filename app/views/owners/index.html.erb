@@ -18,7 +18,7 @@
     <tbody>
       <% @owners.each do |owner| %>
         <tr>
-          <td><%= owner.owner_name %></td>
+          <td><%= link_to owner.owner_name, owner_path(owner) %></td>
           <td><%= owner.owner_address %></td>
           <td><%= owner.owner_city %></td>
           <td><%= owner.owner_province %></td>
